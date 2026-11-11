@@ -1,48 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090d18">
-<meta name="description" content="VisCount is a simple public visitor counter API. Create SVG visitor badges for GitHub READMEs and websites.">
-<title>VisCount — Visitor Counter API</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080c16">
+<meta name="description" content="A simple visitor counter API for GitHub READMEs and websites.">
+<title>VisCount — Visitor Counter</title>
 <style>
-:root{color-scheme:dark;--bg:#090d18;--panel:#111c2c;--line:#293951;--text:#edf4ff;--muted:#91a2bb;--cyan:#70e1ef;--blue:#9aabff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1a3152,transparent 55%),var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(1040px,calc(100% - 36px));margin:auto}
-nav{height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}.brand{font-size:20px;font-weight:800}.logo{display:inline-grid;place-items:center;width:34px;height:34px;margin-right:8px;border-radius:11px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#07111c}.links{display:flex;gap:22px;color:var(--muted);font-size:13px}
-.hero{text-align:center;padding:82px 0 55px}.tag{display:inline-block;padding:6px 12px;border:1px solid #70e1ef55;border-radius:30px;color:var(--cyan);font-size:12px}h1{font-size:clamp(42px,7vw,70px);line-height:1.05;letter-spacing:-3px;margin:22px 0 15px}.grad{background:linear-gradient(90deg,#fff,var(--cyan),var(--blue));background-clip:text;color:transparent}.hero p{max-width:620px;margin:auto;color:var(--muted);font-size:17px}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;border:1px solid var(--line);border-radius:10px;background:#152238;color:var(--text);font-weight:650;font-size:13px;cursor:pointer}.primary{background:linear-gradient(120deg,var(--cyan),var(--blue));border:0;color:#07111c}.actions{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
-section{padding:30px 0 48px}.head{margin-bottom:18px}.head h2{margin:0;font-size:25px}.head p,.muted{color:var(--muted);font-size:13px;margin:4px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{padding:22px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#121e30,#0e1725)}h3{font-size:16px;margin:0 0 5px}label{display:block;color:var(--muted);font-size:12px;margin:16px 0 7px}input{width:100%;padding:12px;border-radius:10px;border:1px solid #34445d;background:#080f1c;color:white;font:inherit}.preview{min-height:125px;margin:15px 0 8px;border:1px dashed #344761;border-radius:11px;background:#080f1b;display:grid;place-items:center;padding:18px;overflow:hidden}.preview img{max-width:100%;height:auto}.code{position:relative;padding:14px 70px 14px 13px;margin-top:8px;border:1px solid #293951;border-radius:10px;background:#080f1b;overflow-wrap:anywhere;font:12px/1.5 ui-monospace,monospace;color:#c4e9f4}.copy{position:absolute;right:7px;top:7px;padding:5px 8px;border:1px solid #34445b;border-radius:7px;background:#152238;color:white;font-size:11px;cursor:pointer}.endpoints{display:grid;gap:9px}.endpoint{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;border:1px solid #25354c;border-radius:10px;background:#0a1321}.method{font:700 10px ui-monospace;color:#8ce6b0}.path{font:12px ui-monospace;overflow-wrap:anywhere}.notice{margin-top:13px;padding:12px;border:1px solid #f2b95b33;border-radius:9px;background:#f2b95b10;color:#d9c59d;font-size:12px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.step{padding:17px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}.step b{color:var(--cyan);font:12px ui-monospace}.step p{margin:5px 0 0;color:var(--muted);font-size:12px}footer{padding:24px 0 32px;border-top:1px solid #ffffff12;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media(max-width:700px){.grid,.steps{grid-template-columns:1fr}.links{gap:10px}.links a:nth-child(2){display:none}.hero{padding:60px 0 38px}h1{letter-spacing:-2px}}
+:root{color-scheme:dark;--bg:#080c16;--panel:#111a2b;--line:#263650;--muted:#8e9db5;--cyan:#77e5ee;--blue:#9caeff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0,#1b3150 0,transparent 55%),var(--bg);color:#eef5ff;font:15px/1.5 system-ui,sans-serif;display:flex;flex-direction:column}
+header{width:min(760px,calc(100% - 32px));margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:24px 0}.brand{font-size:19px;font-weight:800;letter-spacing:-.5px}.mark{display:inline-grid;place-items:center;width:30px;height:30px;margin-right:8px;border-radius:10px;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#07111c}.docs{color:var(--muted);font-size:13px;text-decoration:none}.docs:hover{color:var(--cyan)}
+main{width:min(600px,calc(100% - 32px));margin:auto;text-align:center;padding:36px 0 70px;animation:rise .65s ease both}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #77e5ee44;background:#77e5ee0c;color:var(--cyan);padding:6px 11px;border-radius:30px;font-size:11px;letter-spacing:.3px}.pulse{width:7px;height:7px;background:#85e9ae;border-radius:50%;box-shadow:0 0 12px #85e9ae;animation:pulse 1.8s infinite}
+h1{font-size:clamp(40px,9vw,62px);line-height:1.04;letter-spacing:-2.8px;margin:20px 0 12px}.shine{background:linear-gradient(100deg,#fff 15%,var(--cyan) 48%,var(--blue) 80%);background-size:200% auto;background-clip:text;color:transparent;animation:shine 5s linear infinite}main>p{color:var(--muted);margin:0 auto 28px;max-width:440px}
+.panel{padding:22px;text-align:left;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#131f32dd,#0e1727ee);box-shadow:0 24px 70px #0005;backdrop-filter:blur(12px)}
+label{display:block;color:#b5c3d8;font-size:12px;margin:0 0 8px}input{width:100%;border:1px solid #34445f;border-radius:10px;background:#080f1c;color:white;padding:13px 14px;font:inherit;outline:none;transition:border .2s,box-shadow .2s}input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #77e5ee18}
+.preview{height:100px;display:grid;place-items:center;margin:15px 0;border:1px dashed #34445c;border-radius:11px;background:#080f1b}.preview img{max-width:100%;height:auto}.status{font-size:11px;color:var(--muted);text-align:center;margin-top:-7px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}.btn{border:1px solid var(--line);border-radius:10px;padding:11px 10px;background:#18263c;color:#eaf3ff;font-size:12px;font-weight:700;cursor:pointer;transition:transform .2s,border-color .2s}.btn:hover{transform:translateY(-2px);border-color:var(--cyan)}.btn.primary{background:linear-gradient(110deg,var(--cyan),var(--blue));color:#07111c;border:0}
+.snippet{margin-top:14px;padding:12px;border-radius:10px;background:#080f1b;border:1px solid #25354b;display:flex;align-items:center;gap:10px}.snippet code{font:11px/1.5 ui-monospace,monospace;color:#bdebf0;overflow-wrap:anywhere;flex:1;text-align:left}.snippet button{flex:none;border:1px solid #34445b;border-radius:7px;background:#17243a;color:#fff;padding:7px 9px;font-size:11px;cursor:pointer}
+footer{margin-top:auto;text-align:center;padding:20px;color:#65748c;font-size:11px}footer a{color:#93a6c2;text-decoration:none}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}@keyframes pulse{50%{opacity:.45;box-shadow:0 0 3px #85e9ae}}@keyframes shine{to{background-position:200% center}}
+@media(max-width:420px){.panel{padding:16px}.actions{grid-template-columns:1fr}.snippet{align-items:flex-start}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<nav class="wrap"><a class="brand" href="#"><span class="logo">V</span>VisCount</a><div class="links"><a href="#try">Try API</a><a href="#endpoints">Endpoints</a><a href="#guide">Quick start</a></div><a class="btn" href="https://viscount-inzm9sse.manus.space/api/v1/docs" target="_blank" rel="noreferrer">API Docs ↗</a></nav>
-<header class="hero wrap"><span class="tag">● Public visitor counter API</span><h1>A tiny badge.<br><span class="grad">A little more insight.</span></h1><p>Add a visitor counter to your GitHub README, profile or website with one simple image URL.</p><div class="actions"><a class="btn primary" href="#try">Try the counter ↓</a><a class="btn" href="https://viscount-inzm9sse.manus.space/api/v1/docs" target="_blank" rel="noreferrer">Explore API docs ↗</a></div></header>
-<main class="wrap">
-<section id="try"><div class="head"><h2>Try your visitor badge</h2><p>Enter a username to generate its SVG badge URL.</p></div><div class="grid">
-<div class="card"><h3>Live badge preview</h3><p class="muted">Change the username to update the preview.</p><label for="username">Username</label><input id="username" value="quincunx33" maxlength="64" autocomplete="off"><div class="preview" id="preview"><img id="badge" alt="Visitor counter badge preview"></div><p class="muted" id="status" aria-live="polite">Loading badge…</p></div>
-<div class="card"><h3>Use it anywhere</h3><p class="muted">Copy a snippet for your project.</p><label>SVG image URL</label><div class="code"><button class="copy" data-copy="url">Copy</button><span id="urlCode"></span></div><label>Markdown · GitHub README</label><div class="code"><button class="copy" data-copy="markdown">Copy</button><span id="markdownCode"></span></div><label>HTML</label><div class="code"><button class="copy" data-copy="html">Copy</button><span id="htmlCode"></span></div></div>
-</div></section>
-<section id="endpoints"><div class="head"><h2>API endpoints</h2><p>Integrate VisCount into your own projects.</p></div><div class="card endpoints">
-<div class="endpoint"><span><b class="method">GET</b> <code class="path">/api/v1/counter/{username}</code></span><button class="copy" data-endpoint="counter">Copy URL</button></div>
-<div class="endpoint"><span><b class="method">GET</b> <code class="path">/api/v1/counter/{username}.svg</code></span><button class="copy" data-endpoint="svg">Copy URL</button></div>
-<div class="endpoint"><span><b class="method">GET</b> <code class="path">/api/v1/stats/{username}</code></span><button class="copy" data-endpoint="stats">Copy URL</button></div>
-<div class="endpoint"><span><b class="method">GET</b> <code class="path">/api/v1/health</code></span><button class="copy" data-endpoint="health">Copy URL</button></div>
-<div class="endpoint"><span><b class="method">GET</b> <code class="path">/api/v1/docs</code></span><a class="btn" href="https://viscount-inzm9sse.manus.space/api/v1/docs" target="_blank" rel="noreferrer">Open docs ↗</a></div>
-</div><div class="notice">Note: the statistics endpoint is documented here, but if it returns an internal server error, the backend needs a fix. This static page does not change API behaviour.</div></section>
-<section id="guide"><div class="head"><h2>Quick start</h2><p>Get a badge into your project in three simple steps.</p></div><div class="steps"><div class="step"><b>01 / ENTER</b><h3>Choose a username</h3><p>Type the username in the badge generator above.</p></div><div class="step"><b>02 / COPY</b><h3>Copy your snippet</h3><p>Choose Markdown for GitHub or HTML for a website.</p></div><div class="step"><b>03 / ADD</b><h3>Paste into your project</h3><p>Add the snippet where you want the badge to appear.</p></div></div></section>
+<header><a class="brand" href="#"><span class="mark">V</span>VisCount</a><a class="docs" href="https://viscount-inzm9sse.manus.space/api/v1/docs" target="_blank" rel="noreferrer">API Docs ↗</a></header>
+<main>
+<div class="pill"><span class="pulse"></span> SIMPLE · FREE · DEVELOPER FRIENDLY</div>
+<h1>Your visits,<br><span class="shine">beautifully counted.</span></h1>
+<p>Create a visitor badge for your GitHub README or website in seconds.</p>
+<div class="panel">
+<label for="username">YOUR USERNAME</label>
+<input id="username" value="quincunx33" maxlength="64" placeholder="Enter username" autocomplete="off" spellcheck="false">
+<div class="preview"><img id="badge" alt="Visitor counter badge"><span id="fallback" hidden style="font-size:12px;color:#8e9db5">Badge preview unavailable</span></div>
+<div class="status" id="status" aria-live="polite">Loading preview…</div>
+<div class="actions"><button class="btn primary" id="copyMarkdown">Copy README Badge</button><button class="btn" id="copyUrl">Copy SVG Link</button></div>
+<div class="snippet"><code id="snippet"></code><button id="copyCode">Copy</button></div>
+</div>
 </main>
-<footer class="wrap"><span>© <span id="year"></span> VisCount · Developer-friendly visitor counter</span><a href="https://viscount-inzm9sse.manus.space/api/v1/docs" target="_blank" rel="noreferrer">Documentation ↗</a></footer>
+<footer>Powered by <a href="https://viscount-inzm9sse.manus.space/api/v1/docs" target="_blank" rel="noreferrer">VisCount API</a> · Made for developers</footer>
 <script>
-const BASE='https://viscount-inzm9sse.manus.space', $=id=>document.getElementById(id), safe=s=>s.trim().replace(/[^a-zA-Z0-9_.-]/g,'');
-function values(){const user=safe($('username').value)||'YOUR_USERNAME',url=BASE+'/api/v1/counter/'+encodeURIComponent(user)+'.svg';return{user,url,markdown:'![Visitor Count]('+url+')',html:'<img src="'+url+'" alt="Visitor Count">'}}
-function update(){const v=values();$('urlCode').textContent=v.url;$('markdownCode').textContent=v.markdown;$('htmlCode').textContent=v.html;$('badge').src=v.url;$('status').textContent='Preview for @'+v.user;$('badge').onerror=()=>{$('badge').style.display='none';$('status').textContent='Badge preview unavailable. Check the username or API status.'};$('badge').onload=()=>{$('badge').style.display='block';$('status').textContent='Preview loaded for @'+v.user}}
-$('username').addEventListener('input',update);
-async function copyText(text,button){try{await navigator.clipboard.writeText(text);button.textContent='Copied!'}catch{button.textContent='Copy unavailable'}setTimeout(()=>button.textContent=button.dataset.endpoint?'Copy URL':'Copy',1300)}
-document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{const v=values();copyText(v[b.dataset.copy],b)}));
-const routes={counter:BASE+'/api/v1/counter/YOUR_USERNAME',svg:BASE+'/api/v1/counter/YOUR_USERNAME.svg',stats:BASE+'/api/v1/stats/YOUR_USERNAME',health:BASE+'/api/v1/health'};
-document.querySelectorAll('[data-endpoint]').forEach(b=>b.addEventListener('click',()=>copyText(routes[b.dataset.endpoint],b)));
-$('year').textContent=new Date().getFullYear();update();
+const BASE='https://viscount-inzm9sse.manus.space', $=id=>document.getElementById(id);
+function getData(){const username=$('username').value.trim().replace(/[^a-zA-Z0-9_.-]/g,'')||'YOUR_USERNAME';const url=BASE+'/api/v1/counter/'+encodeURIComponent(username)+'.svg';return{username,url,markdown:'![Visitor Count]('+url+')'}}
+function render(){const d=getData();$('snippet').textContent=d.markdown;$('badge').hidden=false;$('fallback').hidden=true;$('badge').src=d.url;$('status').textContent='Preview for @'+d.username}
+$('username').addEventListener('input',render);
+$('badge').addEventListener('load',()=>{$('status').textContent='Badge ready';$('fallback').hidden=true});
+$('badge').addEventListener('error',()=>{$('badge').hidden=true;$('fallback').hidden=false;$('status').textContent='Could not load badge — check the username or API'});
+async function copy(value,button,label){try{await navigator.clipboard.writeText(value);button.textContent='Copied!'}catch{button.textContent='Copy unavailable'}setTimeout(()=>button.textContent=label,1200)}
+$('copyMarkdown').addEventListener('click',()=>copy(getData().markdown,$('copyMarkdown'),'Copy README Badge'));
+$('copyUrl').addEventListener('click',()=>copy(getData().url,$('copyUrl'),'Copy SVG Link'));
+$('copyCode').addEventListener('click',()=>copy(getData().markdown,$('copyCode'),'Copy'));
+render();
 </script>
 </body></html>
