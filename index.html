@@ -12,9 +12,9 @@ main{width:min(600px,calc(100% - 32px));margin:auto;text-align:center;padding:36
 h1{font-size:clamp(40px,9vw,62px);line-height:1.04;letter-spacing:-2.8px;margin:20px 0 12px}.shine{background:linear-gradient(100deg,#fff 15%,var(--cyan) 48%,var(--blue) 80%);background-size:200% auto;background-clip:text;color:transparent;animation:shine 5s linear infinite}main>p{color:var(--muted);margin:0 auto 28px;max-width:440px}
 .panel{padding:22px;text-align:left;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#131f32dd,#0e1727ee);box-shadow:0 24px 70px #0005;backdrop-filter:blur(12px)}
 label{display:block;color:#b5c3d8;font-size:12px;margin:0 0 8px}input{width:100%;border:1px solid #34445f;border-radius:10px;background:#080f1c;color:white;padding:13px 14px;font:inherit;outline:none;transition:border .2s,box-shadow .2s}input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #77e5ee18}
-.preview{height:100px;display:grid;place-items:center;margin:15px 0;border:1px dashed #34445c;border-radius:11px;background:#080f1b}.preview img{max-width:100%;height:auto}.status{font-size:11px;color:var(--muted);text-align:center;margin-top:-7px}
+.preview{min-height:112px;display:grid;place-items:center;margin:15px 0;border:1px dashed #34445c;border-radius:11px;background:#080f1b;padding:16px}.preview img{display:block;max-width:100%;height:auto}.preview-error{color:var(--muted);font-size:12px;text-align:center;line-height:1.7}.preview-error a{color:var(--cyan);text-decoration:none}.status{font-size:11px;color:var(--muted);text-align:center;margin-top:-7px}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:17px}.btn{border:1px solid var(--line);border-radius:10px;padding:11px 10px;background:#18263c;color:#eaf3ff;font-size:12px;font-weight:700;cursor:pointer;transition:transform .2s,border-color .2s}.btn:hover{transform:translateY(-2px);border-color:var(--cyan)}.btn.primary{background:linear-gradient(110deg,var(--cyan),var(--blue));color:#07111c;border:0}
-.snippet{margin-top:14px;padding:12px;border-radius:10px;background:#080f1b;border:1px solid #25354b;display:flex;align-items:center;gap:10px}.snippet code{font:11px/1.5 ui-monospace,monospace;color:#bdebf0;overflow-wrap:anywhere;flex:1;text-align:left}.snippet button{flex:none;border:1px solid #34445b;border-radius:7px;background:#17243a;color:#fff;padding:7px 9px;font-size:11px;cursor:pointer}
+.snippet{margin-top:14px;padding:12px;border-radius:10px;background:#080f1b;border:1px solid #25354b;display:flex;align-items:center;gap:10px}.snippet code{font:11px/1.5 ui-monospace,monospace;color:#bdebf0;overflow-wrap:anywhere;flex:1;text-align:left}.snippet button{flex:none;border:1px solid #34445b;border-radius:7px;background:#17243a;color:#fff;padding:7px 9px;font-size:11px;cursor:pointer}.toast{min-height:18px;margin-top:9px;text-align:center;font-size:11px;color:var(--cyan)}.btn:focus-visible,.snippet button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 footer{margin-top:auto;text-align:center;padding:20px;color:#65748c;font-size:11px}footer a{color:#93a6c2;text-decoration:none}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}@keyframes pulse{50%{opacity:.45;box-shadow:0 0 3px #85e9ae}}@keyframes shine{to{background-position:200% center}}
 @media(max-width:420px){.panel{padding:16px}.actions{grid-template-columns:1fr}.snippet{align-items:flex-start}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
@@ -29,24 +29,24 @@ footer{margin-top:auto;text-align:center;padding:20px;color:#65748c;font-size:11
 <div class="panel">
 <label for="username">YOUR USERNAME</label>
 <input id="username" value="quincunx33" maxlength="64" placeholder="Enter username" autocomplete="off" spellcheck="false">
-<div class="preview"><img id="badge" alt="Visitor counter badge"><span id="fallback" hidden style="font-size:12px;color:#8e9db5">Badge preview unavailable</span></div>
+<div class="preview"><img id="badge" alt="Visitor counter badge"><div id="fallback" class="preview-error" hidden>Could not load the live badge.<br><a id="openBadge" href="#" target="_blank" rel="noreferrer">Open SVG directly ↗</a> · <a href="#" id="retry">Try again</a></div></div>
 <div class="status" id="status" aria-live="polite">Loading preview…</div>
 <div class="actions"><button class="btn primary" id="copyMarkdown">Copy README Badge</button><button class="btn" id="copyUrl">Copy SVG Link</button></div>
-<div class="snippet"><code id="snippet"></code><button id="copyCode">Copy</button></div>
+<div class="snippet"><code id="snippet"></code></div><div class="toast" id="toast" aria-live="polite"></div>
 </div>
 </main>
 <footer>Powered by <a href="https://viscount-inzm9sse.manus.space/api/v1/docs" target="_blank" rel="noreferrer">VisCount API</a> · Made for developers</footer>
 <script>
 const BASE='https://viscount-inzm9sse.manus.space', $=id=>document.getElementById(id);
 function getData(){const username=$('username').value.trim().replace(/[^a-zA-Z0-9_.-]/g,'')||'YOUR_USERNAME';const url=BASE+'/api/v1/counter/'+encodeURIComponent(username)+'.svg';return{username,url,markdown:'![Visitor Count]('+url+')'}}
-function render(){const d=getData();$('snippet').textContent=d.markdown;$('badge').hidden=false;$('fallback').hidden=true;$('badge').src=d.url;$('status').textContent='Preview for @'+d.username}
+function render(){const d=getData();$('snippet').textContent=d.markdown;$('openBadge').href=d.url;$('badge').hidden=false;$('fallback').hidden=true;$('status').textContent='Loading live preview…';$('badge').src=d.url+'?t='+Date.now()}
 $('username').addEventListener('input',render);
-$('badge').addEventListener('load',()=>{$('status').textContent='Badge ready';$('fallback').hidden=true});
-$('badge').addEventListener('error',()=>{$('badge').hidden=true;$('fallback').hidden=false;$('status').textContent='Could not load badge — check the username or API'});
-async function copy(value,button,label){try{await navigator.clipboard.writeText(value);button.textContent='Copied!'}catch{button.textContent='Copy unavailable'}setTimeout(()=>button.textContent=label,1200)}
+$('badge').addEventListener('load',()=>{$('status').textContent='Live badge preview';$('fallback').hidden=true});
+$('badge').addEventListener('error',()=>{$('badge').hidden=true;$('fallback').hidden=false;$('status').textContent='Preview unavailable — the API may be temporarily unreachable'});
+$('retry').addEventListener('click',e=>{e.preventDefault();render()});
+async function copy(value,button,label){const original=label;let ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(value);ok=true}}catch{}if(!ok){const area=document.createElement('textarea');area.value=value;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();try{ok=document.execCommand('copy')}catch{}area.remove()}$('toast').textContent=ok?'Copied to clipboard.':'Copy failed. Please select and copy the text manually.';button.textContent=ok?'Copied!':'Try again';setTimeout(()=>button.textContent=original,1500)}
 $('copyMarkdown').addEventListener('click',()=>copy(getData().markdown,$('copyMarkdown'),'Copy README Badge'));
 $('copyUrl').addEventListener('click',()=>copy(getData().url,$('copyUrl'),'Copy SVG Link'));
-$('copyCode').addEventListener('click',()=>copy(getData().markdown,$('copyCode'),'Copy'));
 render();
 </script>
 </body></html>
