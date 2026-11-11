@@ -21,17 +21,32 @@ Add this to your GitHub profile README:
 <img src="https://viscount-inzm9sse.manus.space/api/v1/counter/YOUR_USERNAME.svg" alt="Visitors" />
 ```
 
-### API
+### API Endpoints
 
-| Endpoint | Description |
-|---|---|
-| `/api/v1/counter/:username` | Visitor count |
-| `/api/v1/counter/:username.svg` | SVG badge |
-| `/api/v1/stats/:username` | Account statistics |
-| `/api/v1/docs` | API documentation |
-| `/api/v1/health` | Service health |
+**Base URL**
+```text
+https://viscount-inzm9sse.manus.space
+```
 
-**Base URL:** [viscount-inzm9sse.manus.space](https://viscount-inzm9sse.manus.space)
+| Endpoint | Full URL | Description |
+|---|---|---|
+| `/api/v1/counter/:username` | [Open](https://viscount-inzm9sse.manus.space/api/v1/counter/YOUR_USERNAME) | Visitor count |
+| `/api/v1/counter/:username.svg` | [Open](https://viscount-inzm9sse.manus.space/api/v1/counter/YOUR_USERNAME.svg) | SVG badge |
+| `/api/v1/stats/:username` | [Open](https://viscount-inzm9sse.manus.space/api/v1/stats/YOUR_USERNAME) | Account statistics |
+| `/api/v1/docs` | [Open](https://viscount-inzm9sse.manus.space/api/v1/docs) | API documentation |
+| `/api/v1/health` | [Open](https://viscount-inzm9sse.manus.space/api/v1/health) | Service health |
+
+Replace `YOUR_USERNAME` with your account username.
+
+**Example — quincunx33**
+
+```text
+https://viscount-inzm9sse.manus.space/api/v1/counter/quincunx33
+https://viscount-inzm9sse.manus.space/api/v1/counter/quincunx33.svg
+https://viscount-inzm9sse.manus.space/api/v1/stats/quincunx33
+https://viscount-inzm9sse.manus.space/api/v1/docs
+https://viscount-inzm9sse.manus.space/api/v1/health
+```
 
 <div align="center">
 
