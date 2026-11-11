@@ -30,7 +30,7 @@ footer{margin-top:auto;text-align:center;padding:20px;color:#65748c;font-size:11
 <label for="username">YOUR USERNAME</label>
 <input id="username" value="quincunx33" maxlength="64" placeholder="Enter username" autocomplete="off" spellcheck="false">
 <div class="preview"><img id="badge" alt="Visitor counter badge"><div id="fallback" class="preview-error" hidden>Live preview could not be loaded.<br><a id="openBadge" href="#" target="_blank" rel="noreferrer">Open SVG directly ↗</a> · <a href="#" id="retry">Retry preview</a></div></div>
-<div class="status" id="status" aria-live="polite">Loading preview…</div>
+<div class="status" id="status" aria-live="polite">Loading preview… · fresh cache-busting URL</div>
 <div class="actions"><button class="btn" id="copyMarkdown">Copy Markdown</button></div>
 <div class="snippet"><code id="snippet"></code></div>
 <div class="toast" id="toast" aria-live="polite"></div>
@@ -40,7 +40,7 @@ footer{margin-top:auto;text-align:center;padding:20px;color:#65748c;font-size:11
 <script>
 const BASE='https://viscount-inzm9sse.manus.space', $=id=>document.getElementById(id);
 let previewTimer;
-function getData(){const raw=$('username').value.trim();const username=raw.replace(/[^a-zA-Z0-9_.-]/g,'')||'YOUR_USERNAME';const url=BASE+'/api/v1/counter/'+encodeURIComponent(username)+'.svg';return{username,url,markdown:'![Visitor Count]('+url+')'}}
+function getData(){const raw=$('username').value.trim();const username=raw.replace(/[^a-zA-Z0-9_.-]/g,'')||'YOUR_USERNAME';const cacheBuster=Date.now();const url=BASE+'/api/v1/counter/'+encodeURIComponent(username)+'.svg?v='+cacheBuster;return{username,url,markdown:'![Visitor Count]('+url+')'}}
 function render(){const d=getData();$('snippet').textContent=d.markdown;$('openBadge').href=d.url;$('badge').hidden=false;$('fallback').hidden=true;$('status').textContent='Loading live badge…';clearTimeout(previewTimer);$('badge').removeAttribute('src');$('badge').src=d.url;previewTimer=setTimeout(()=>{if(!$('badge').complete||$('badge').naturalWidth===0){$('badge').hidden=true;$('fallback').hidden=false;$('status').textContent='Preview unavailable — open the SVG directly to verify it'}},12000)}
 $('username').addEventListener('input',render);
 $('badge').addEventListener('load',()=>{clearTimeout(previewTimer);$('badge').hidden=false;$('fallback').hidden=true;$('status').textContent='Live badge preview'});
