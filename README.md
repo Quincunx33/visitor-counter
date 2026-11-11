@@ -92,7 +92,7 @@ GET https://viscount-inzm9sse.manus.space/api/v1/stats/quincunx33
 GET https://viscount-inzm9sse.manus.space/api/v1/health
 ```
 
-See the live [API documentation] for the current response formats and usage details.
+See the live [API documentation](https://viscount-inzm9sse.manus.space/api/v1/docs) for the current response formats and usage details.
 
 ## Links
 
