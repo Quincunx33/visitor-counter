@@ -36,7 +36,7 @@ footer{margin-top:auto;text-align:center;padding:20px;color:#65748c;font-size:11
 <div id="fallback" class="preview-error" hidden>Live preview could not be loaded.<br><a id="openBadge" href="#" target="_blank" rel="noreferrer">Open SVG directly ↗</a></div>
 </div>
 <div class="status" id="status" aria-live="polite">Waiting for username confirmation</div>
-<div class="actions"><button class="btn" id="confirmUsername" type="button">Confirm &amp; Generate Badge</button><button class="btn" id="copyMarkdown" type="button" disabled>Copy Markdown</button></div>
+<div class="actions"><button class="btn" id="confirmUsername" type="button">Confirm Username</button><button class="btn" id="copyMarkdown" type="button" hidden disabled>Copy Markdown</button></div>
 <div class="snippet"><code id="snippet">Confirm a username to generate the Markdown embed.</code></div>
 <div class="toast" id="toast" aria-live="polite"></div>
 </div>
@@ -66,13 +66,15 @@ function resetPreview(){
   clearTimeout(previewTimer);
   requestInProgress=false;
   $('confirmUsername').disabled=false;
-  $('confirmUsername').textContent='Confirm & Generate Badge';
+  $('confirmUsername').textContent='Confirm Username';
   $('badgePreview').removeAttribute('src');
   $('badgePreview').hidden=true;
   $('fallback').hidden=true;
   $('previewPlaceholder').hidden=false;
   $('snippet').textContent='Confirm a username to generate the Markdown embed.';
   $('copyMarkdown').disabled=true;
+  $('copyMarkdown').hidden=true;
+  $('confirmUsername').hidden=false;
   confirmedUsername=null;
   confirmedUrl=null;
   setMessage('Username changed — confirm again to generate a badge.');
@@ -140,8 +142,10 @@ function confirmUsername(){
 function finishGeneration(success){
   requestInProgress=false;
   $('confirmUsername').disabled=false;
-  $('confirmUsername').textContent='Confirm & Generate Badge';
+  $('confirmUsername').textContent='Confirm Username';
   $('copyMarkdown').disabled=false;
+  $('copyMarkdown').hidden=false;
+  $('confirmUsername').hidden=true;
   setMessage(success?'Badge generated. The counter API was requested once.':'Badge URL generated, but the preview could not load. You can still copy the Markdown.');
 }
 $('username').addEventListener('input',()=>{
