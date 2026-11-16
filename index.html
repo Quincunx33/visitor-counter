@@ -33,7 +33,7 @@ footer{margin-top:auto;text-align:center;padding:20px;color:#65748c;font-size:11
 <div class="preview">
 <div id="previewPlaceholder" class="preview-placeholder">Your badge preview will appear here<br>after you confirm the username.</div>
 <img id="badgePreview" alt="Visitor counter badge" hidden>
-<div id="fallback" class="preview-error" hidden>Live preview could not be loaded.<br><a id="openBadge" href="#" target="_blank" rel="noreferrer">Open SVG directly ↗</a> · <a href="#" id="retry">Retry preview</a></div>
+<div id="fallback" class="preview-error" hidden>Live preview could not be loaded.<br><a id="openBadge" href="#" target="_blank" rel="noreferrer">Open SVG directly ↗</a></div>
 </div>
 <div class="status" id="status" aria-live="polite">Waiting for username confirmation</div>
 <div class="actions"><button class="btn" id="confirmUsername" type="button">Confirm &amp; Generate Badge</button><button class="btn" id="copyMarkdown" type="button" disabled>Copy Markdown</button></div>
@@ -64,6 +64,9 @@ function setMessage(message,isError=false){
 }
 function resetPreview(){
   clearTimeout(previewTimer);
+  requestInProgress=false;
+  $('confirmUsername').disabled=false;
+  $('confirmUsername').textContent='Confirm & Generate Badge';
   $('badgePreview').removeAttribute('src');
   $('badgePreview').hidden=true;
   $('fallback').hidden=true;
@@ -162,14 +165,6 @@ $('badgePreview').addEventListener('error',()=>{
     $('fallback').hidden=false;
     finishGeneration(false);
   }
-});
-$('retry').addEventListener('click',e=>{
-  e.preventDefault();
-  if(!confirmedUrl)return;
-  $('fallback').hidden=true;
-  $('badgePreview').hidden=false;
-  setMessage('Retrying badge preview…');
-  $('badgePreview').src=confirmedUrl+'&retry='+Date.now();
 });
 async function copyMarkdown(){
   if(!confirmedUsername || !confirmedUrl)return;
